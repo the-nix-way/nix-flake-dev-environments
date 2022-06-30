@@ -3,5 +3,5 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Hello from inside your pure Nix-flake-driven Go environment!")
+	fmt.Println("Hello from inside your pure Nix-flake-provided Go environment!")
 }

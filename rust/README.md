@@ -1,9 +1,9 @@
-# Rust shell environment
+# Rust dev environment
 
-Open up a shell:
+Open up the provided Nix shell:
 
 ```shell
-nix develop .
+nix develop --ignore-environment
 ```
 
 Once inside the shell, you can run standard [Cargo] commands:
@@ -21,6 +21,4 @@ cargo build --release
 ./target/release/nix-flakes-rust
 ```
 
-> This flake doesn't convert the Rust dependencies into Nix dependencies. It only provides a "pure" Nix environment for using [Cargo].
-
-[cargo]: https://cargo.rs
+[cargo]: https://crates.io/

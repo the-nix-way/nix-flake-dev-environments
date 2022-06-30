@@ -36,11 +36,11 @@
                 # https://github.com/uudashr/gopkgs
                 gopkgs
               ];
+
+              shellHook = ''
+                echo "Running `${pkgs.go_1_18}/bin/go version`"
+              '';
             };
-            
-            shellHook = ''
-              echo "Running `${pkgs.go_1_18}/bin/go version`"
-            '';
           };
         }
       );

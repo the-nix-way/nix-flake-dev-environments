@@ -22,11 +22,15 @@
               buildInputs = [
                 node
               ];
+
+              shellHook = ''
+                echo "Installing npm dependencies"
+
+                ${node}/bin/npm install
+
+                echo "Running node `${node}/bin/node --version`"
+              '';
             };
-            
-            shellHook = ''
-              echo "OK NOW"
-            '';
           };
         }
       );
