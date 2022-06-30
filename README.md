@@ -21,7 +21,7 @@
 
 You can run these Nix flakes examples in your browser using [GitPod]:
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/the-nix-way/nix-flakes-examples)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/the-nix-way/flake-dev-environments)
 
 The GitPod environment has [Nix] installed and flakes enabled.
 
