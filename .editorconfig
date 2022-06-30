@@ -16,3 +16,6 @@ indent_size = 4
 [{Makefile,*.go,*.py}]
 indent_style = tab
 indent_size = 4
+
+[*.lock]
+insert_final_newline = false
