@@ -7,9 +7,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs";
     # A set of helper functions for using flakes
     flake-utils.url = "github:numtide/flake-utils";
+    mach-nix.url = "github:DavHau/mach-nix";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, mach-nix }:
     flake-utils.lib.eachDefaultSystem
       (system:
         let
@@ -17,7 +18,11 @@
 
           python = pkgs.python39;
 
-          others = with pkgs.python39Packages; [
+          pythonEnv = mach-nix.lib.${system}.mkPython {
+            requirements = builtins.readFile ./requirements.txt;
+          };
+
+          pythonTools = with pkgs.python39Packages; [
             pip
             virtualenv
           ];
@@ -26,14 +31,22 @@
             default = pkgs.mkShell {
               # Packages included in the environment
               buildInputs = [
-                python
-              ] ++ others;
+                pythonEnv
+              ] ++ pythonTools;
 
               # Run when the shell is started up
               shellHook = ''
                 echo "Running `${python}/bin/python --version`"
               '';
             };
+          };
+
+          packages = {
+            venv = pythonEnv;
+          };
+
+          defaultPackage = mach-nix.lib.${system}.mkPythonShell {
+            requirements = builtins.readFile ./requirements.txt;
           };
         }
       );
