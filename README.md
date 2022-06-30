@@ -1,3 +1,4 @@
 # Example development environments driven by Nix flakes
 
-- [`go`](./go)
+- [`go`](./go/)
+- [`rust`](./rust/)

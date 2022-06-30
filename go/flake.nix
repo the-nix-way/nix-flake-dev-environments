@@ -1,8 +1,11 @@
 {
   description = "A Nix-flake-based Go development environment";
 
+  # GitHub URLs for the Nix inputs we're using
   inputs = {
+    # Simply the greatest package repository on the planet
     nixpkgs.url = "github:NixOS/nixpkgs";
+    # A set of helper functions for using flakes
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -12,26 +15,28 @@
         let
           pkgs = import nixpkgs { inherit system; };
         in {
-          devShell = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              # Go version 1.18
-              go_1_18
+          devShells = {
+            default = pkgs.mkShell {
+              buildInputs = with pkgs; [
+                # Go version 1.18
+                go_1_18
 
-              # goimports, godoc, etc.
-              gotools
+                # goimports, godoc, etc.
+                gotools
 
-              # https://github.com/golangci/golangci-lint
-              golangci-lint
+                # https://github.com/golangci/golangci-lint
+                golangci-lint
 
-              # The Go language server (for IDEs and such)
-              gopls
+                # The Go language server (for IDEs and such)
+                gopls
 
-              # https://pkg.go.dev/github.com/ramya-rao-a/go-outline
-              go-outline
+                # https://pkg.go.dev/github.com/ramya-rao-a/go-outline
+                go-outline
 
-              # https://github.com/uudashr/gopkgs
-              gopkgs
-            ];
+                # https://github.com/uudashr/gopkgs
+                gopkgs
+              ];
+            };
             
             shellHook = ''
               echo "Running `${pkgs.go_1_18}/bin/go version`"
