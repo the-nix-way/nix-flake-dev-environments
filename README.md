@@ -3,6 +3,7 @@
 | Language        | Project           |
 | :-------------- | :---------------- |
 | [Go]            | [`go`](./go/)     |
+| [Java]          | [`java`](./java/) |
 | [Node.js][node] | [`node`](./node/) |
 | [Rust]          | [`rust`](./rust/) |
 
@@ -15,5 +16,6 @@
 | [`github:oxalica/rust-overlay`](https://github.com/oxalica/rust-overlay) | [`3e95d6696b51f88b3ebfc7a21aefaeeb70a245bd`](https://github.com/oxalica/rust-overlay/tree/3e95d6696b51f88b3ebfc7a21aefaeeb70a245bd) |
 
 [go]: https://golang.org
+[java]: https://docs.oracle.com/java
 [node]: https://nodejs.org
 [rust]: https://rust-lang.org

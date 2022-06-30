@@ -26,17 +26,20 @@
 
         # Use the specific version of the Rust toolchain specified by the toolchain file
         localRust = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
+
+        # Other utilities commonly used in Rust projects (but not in this example project)
+        others = with pkgs; [
+          openssl
+        ];
       in {
-        # The shell environment
         devShells = {
           default = pkgs.mkShell {
+            # Packages included in the environment
             buildInputs = [
               localRust
+            ] ++ others;
 
-              # Other utilities commonly used in Rust projects (but not this one)
-              pkgs.openssl
-            ];
-
+            # Run when the shell is started up
             shellHook = ''
               echo "Running `${localRust}/bin/cargo --version`"
             '';

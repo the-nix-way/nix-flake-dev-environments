@@ -17,6 +17,7 @@
         in {
           devShells = {
             default = pkgs.mkShell {
+              # Packages included in the environment
               buildInputs = with pkgs; [
                 # Go version 1.18
                 go_1_18
@@ -37,6 +38,7 @@
                 gopkgs
               ];
 
+              # Run when the shell is started up
               shellHook = ''
                 echo "Running `${pkgs.go_1_18}/bin/go version`"
               '';
