@@ -40,6 +40,7 @@
 
               # Run when the shell is started up
               shellHook = ''
+                echo "Entering Go env"
                 echo "Running `${pkgs.go_1_18}/bin/go version`"
               '';
             };

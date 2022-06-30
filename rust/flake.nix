@@ -41,10 +41,11 @@
 
             # Run when the shell is started up
             shellHook = ''
+              echo "Entering Rust env"
               echo "Running `${localRust}/bin/cargo --version`"
             '';
           };
-        };      
+        };
       }
     );
 }

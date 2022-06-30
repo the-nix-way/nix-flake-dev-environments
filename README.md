@@ -5,6 +5,7 @@
 | [Go]            | [`go`](./go/)         |
 | [Java]          | [`java`](./java/)     |
 | [Node.js][node] | [`node`](./node/)     |
+| [PHP]           | [`php`](./php/)       |
 | [Python]        | [`python`](./python/) |
 | [Rust]          | [`rust`](./rust/)     |
 
@@ -19,5 +20,6 @@
 [go]: https://golang.org
 [java]: https://docs.oracle.com/java
 [node]: https://nodejs.org
+[php]: https://www.php.net
 [python]: https://python.org
 [rust]: https://rust-lang.org

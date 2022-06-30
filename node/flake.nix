@@ -26,10 +26,7 @@
 
               # Run when the shell is started up
               shellHook = ''
-                echo "Installing npm dependencies"
-
-                ${node}/bin/npm install
-
+                echo "Entering Node.js env"
                 echo "Running node `${node}/bin/node --version`"
               '';
             };

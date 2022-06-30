@@ -9,6 +9,7 @@ nix develop --ignore-environment
 Once inside the shell, you can run standard [node] and [npm] commands:
 
 ```shell
+npm install
 node ./index.js
 ```
 

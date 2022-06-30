@@ -36,6 +36,7 @@
 
               # Run when the shell is started up
               shellHook = ''
+                echo "Entering Python env"
                 echo "Running `${python}/bin/python --version`"
               '';
             };
