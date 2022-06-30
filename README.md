@@ -1,11 +1,12 @@
 # Development environments driven by Nix flakes
 
-| Language        | Project           |
-| :-------------- | :---------------- |
-| [Go]            | [`go`](./go/)     |
-| [Java]          | [`java`](./java/) |
-| [Node.js][node] | [`node`](./node/) |
-| [Rust]          | [`rust`](./rust/) |
+| Language        | Project               |
+| :-------------- | :-------------------- |
+| [Go]            | [`go`](./go/)         |
+| [Java]          | [`java`](./java/)     |
+| [Node.js][node] | [`node`](./node/)     |
+| [Python]        | [`python`](./python/) |
+| [Rust]          | [`rust`](./rust/)     |
 
 ## Revisions
 
@@ -18,4 +19,5 @@
 [go]: https://golang.org
 [java]: https://docs.oracle.com/java
 [node]: https://nodejs.org
+[python]: https://python.org
 [rust]: https://rust-lang.org
