@@ -13,5 +13,11 @@ npm install
 node ./index.js
 ```
 
+To use the Node.js environment without checking out this repo:
+
+```shell
+nix develop 'github:the-nix-way/nix-flake-dev-environments?dir=node'
+```
+
 [node]: https://nodejs.org
 [npm]: https://npmjs.org
