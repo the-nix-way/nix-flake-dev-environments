@@ -2,6 +2,7 @@
 
 | Language        | Project               |
 | :-------------- | :-------------------- |
+| [Gleam]         | [`gleam`](./gleam)    |
 | [Go]            | [`go`](./go/)         |
 | [Java]          | [`java`](./java/)     |
 | [Node.js][node] | [`node`](./node/)     |
@@ -26,6 +27,7 @@ You can run these Nix flakes examples in your browser using [GitPod]:
 The GitPod environment has [Nix] installed and flakes enabled.
 
 [gitpod]: https://gitpod.io
+[gleam]: https://gleam.run
 [go]: https://golang.org
 [java]: https://docs.oracle.com/java
 [nix]: https://nixos.org

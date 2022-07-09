@@ -30,6 +30,7 @@
         # Other utilities commonly used in Rust projects (but not in this example project)
         others = with pkgs; [
           openssl
+          pkg-config
         ];
       in {
         devShells = {
