@@ -19,3 +19,6 @@ indent_size = 4
 
 [*.lock]
 insert_final_newline = false
+
+[.ruby-version]
+insert_final_newline = false
