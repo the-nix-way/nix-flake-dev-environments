@@ -29,7 +29,7 @@
             buildInputs = [
               rubyEnv
               rubyEnv.wrappedRuby
-            ] ++ (with pkgs; [ sqlite ]);
+            ];
           };
 
           update = mkShell {
