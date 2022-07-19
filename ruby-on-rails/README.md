@@ -1,12 +1,24 @@
-# Ruby on Rails environment
+# README
 
-## How to update versions
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-```shell
-nix develop .#update
+Things you may want to cover:
 
-# Inside the Nix shell
-rm Gemfile.lock gemset.nix
-bundle lock
-bundix -l
-```
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
