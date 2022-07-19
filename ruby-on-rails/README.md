@@ -1,24 +1,19 @@
-# README
+# Ruby on Rails dev environment
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Open up the provided Nix shell:
 
-Things you may want to cover:
+```shell
+nix develop --ignore-environment
+```
 
-* Ruby version
+Once inside the shell, you can run the Rails app:
 
-* System dependencies
+```shell
+./bin/rails server
+```
 
-* Configuration
+To use the Rust environment without checking out this repo:
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```shell
+nix develop 'github:the-nix-way/nix-flake-dev-environments?dir=ruby-on-rails'
+```
