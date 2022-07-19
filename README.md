@@ -1,14 +1,15 @@
 # Development environments driven by Nix flakes
 
-| Language        | Project               |
-| :-------------- | :-------------------- |
-| [Gleam]         | [`gleam`](./gleam)    |
-| [Go]            | [`go`](./go/)         |
-| [Java]          | [`java`](./java/)     |
-| [Node.js][node] | [`node`](./node/)     |
-| [PHP]           | [`php`](./php/)       |
-| [Python]        | [`python`](./python/) |
-| [Rust]          | [`rust`](./rust/)     |
+| Language/framework   | Project                             |
+| :------------------- | :---------------------------------- |
+| [Gleam]              | [`gleam`](./gleam)                  |
+| [Go]                 | [`go`](./go/)                       |
+| [Java]               | [`java`](./java/)                   |
+| [Node.js][node]      | [`node`](./node/)                   |
+| [PHP]                | [`php`](./php/)                     |
+| [Python]             | [`python`](./python/)               |
+| [Ruby on Rails][ror] | [`ruby-on-rails`](./ruby-on-rails/) |
+| [Rust]               | [`rust`](./rust/)                   |
 
 ## Revisions
 
@@ -34,4 +35,5 @@ The GitPod environment has [Nix] installed and flakes enabled.
 [node]: https://nodejs.org
 [php]: https://www.php.net
 [python]: https://python.org
+[ror]: https://rubyonrails.org
 [rust]: https://rust-lang.org
