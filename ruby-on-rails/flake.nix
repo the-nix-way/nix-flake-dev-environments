@@ -13,7 +13,7 @@
 
         ruby = pkgs.ruby_3_0; # Use a single version of Ruby throughout
 
-        gems = bundlerEnv { # The full app environment with dependencies
+        rubyEnv = bundlerEnv { # The full app environment with dependencies
           name = "rails-env";
           inherit ruby;
           gemdir = ./.; # Points to Gemfile.lock and gemset.nix
@@ -27,8 +27,8 @@
 
           run = mkShell {
             buildInputs = [
-              gems
-              gems.wrappedRuby
+              rubyEnv
+              rubyEnv.wrappedRuby
             ] ++ (with pkgs; [ sqlite ]);
           };
 
