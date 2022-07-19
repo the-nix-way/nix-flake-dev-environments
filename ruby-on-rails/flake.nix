@@ -1,5 +1,5 @@
 {
-  description = "TODO";
+  description = "Ruby on Rails development environment";
 
   inputs = {
     nixpkgs.url = "nixpkgs";
