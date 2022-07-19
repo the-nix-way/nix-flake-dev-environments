@@ -20,13 +20,13 @@
         inherit (pkgs.lib) inNixShell;
         inherit (pkgs.stdenv) mkDerivation;
 
-        ruby = pkgs.ruby_3_0;
+        ruby = pkgs.ruby_3_0; # Use a single version of Ruby throughout
 
-        gems = bundlerEnv {
+        gems = bundlerEnv { # The full app environment with dependencies
           name = "rails-env";
           inherit ruby;
-          gemdir = ./.;
-          copyGemFiles = true;
+          gemdir = ./.; # Points to Gemfile.lock and gemset.nix
+          copyGemFiles = true; # Not sure if this is necessary
         };
       in {
         packages = rec {
@@ -34,7 +34,7 @@
 
           railsApp = mkDerivation {
             name = "nix-flake-rails-app";
-            src = if inNixShell then null else gitignoreSource ./.;
+            src = gitignoreSource ./.;
             env = gems;
             buildInputs = [
               gems
@@ -61,7 +61,7 @@
           };
 
           update = mkShell {
-            buildInputs = [ ruby ] ++ (with pkgs; [ bundix bundler-audit bundler ruby ]);
+            buildInputs = [ ruby ] ++ (with pkgs; [ bundix bundler-audit bundler ]);
           };
         };
       }
