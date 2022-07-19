@@ -10,14 +10,26 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-        inherit (pkgs) mkShell;
+        inherit (pkgs) bundlerEnv mkShell;
+        ruby = pkgs.ruby_3_0;
+
+        gems = bundlerEnv {
+          name = "rails-env";
+          inherit ruby;
+          gemdir = ./.;
+          copyGemFiles = true;
+        };
       in {
         devShells = {
           default = mkShell {
             buildInputs = with pkgs; [
-              bundix
-              bundler
+              gems
+              gems.wrappedRuby
             ];
+          };
+
+          update = mkShell {
+            buildInputs = [ ruby ] ++ (with pkgs; [ bundix bundler ruby ]);
           };
         };
       }
