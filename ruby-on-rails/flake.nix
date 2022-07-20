@@ -22,36 +22,21 @@
         };
 
         inherit (nix-filter.lib) filter;
-        inherit (pkgs) bundlerEnv mkShell;
+        inherit (pkgs) bundlerEnv mkShell substituteAll writeScriptBin;
         inherit (pkgs.stdenv) mkDerivation;
+
+        updateScript = builtins.readFile (substituteAll {
+          src = ./scripts/update.sh;
+          bundix = "${pkgs.bundix}/bin/bundix";
+          bundler = "${rubyEnv.bundler}/bin/bundler";
+        });
+
+        updateScriptBin = writeScriptBin "update-deps" updateScript;
       in {
         apps = {
           default = {
             type = "app";
             program = "${self.packages.${system}.default}/bin/rails";
-          };
-        };
-
-        packages = rec {
-          default = railsApp;
-
-          railsApp = mkDerivation {
-            name = "nix-flake-rails";
-            src = filter {
-              root = ./.;
-              exclude = [
-                ./flake.lock
-                ./flake.nix
-                ./gemset.nix
-                ./README.md
-              ];
-            };
-            buildInputs = [ rubyEnv rubyEnv.wrappedRuby ] ++ (with pkgs; [ bundler ]);
-            installPhase = ''
-              mkdir -p $out
-              mkdir -p $out/tmp/{cache,pids,sockets}
-              cp -r $src/* $out/
-            '';
           };
         };
 
@@ -66,7 +51,12 @@
           };
 
           update = mkShell {
-            buildInputs = [ ruby ] ++ (with pkgs; [ bundix bundler-audit bundler ]);
+            buildInputs = [
+              ruby
+              updateScriptBin
+            ] ++ (with pkgs; [
+              bundler-audit
+            ]);
           };
         };
       }
