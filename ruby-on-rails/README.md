@@ -18,6 +18,8 @@ To use the Rails environment without checking out this repo:
 nix develop 'github:the-nix-way/nix-flake-dev-environments?dir=ruby-on-rails'
 ```
 
+Note that this environment only works in conjunction with an existing `Gemfile`, `Gemfile.lock`, and `gemset.nix`.
+
 ## Updating dependencies
 
 To make updates to the app's dependencies, such as bumping the Rails version, there's a special `update` shell for that:
