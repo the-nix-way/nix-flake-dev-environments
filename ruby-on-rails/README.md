@@ -12,7 +12,7 @@ Once inside the shell, you can run the Rails app:
 ./bin/rails server
 ```
 
-To use the Rust environment without checking out this repo:
+To use the Rails environment without checking out this repo:
 
 ```shell
 nix develop 'github:the-nix-way/nix-flake-dev-environments?dir=ruby-on-rails'
