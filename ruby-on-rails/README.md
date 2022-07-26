@@ -18,17 +18,15 @@ To use the Rails environment without checking out this repo:
 nix develop 'github:the-nix-way/nix-flake-dev-environments?dir=ruby-on-rails'
 ```
 
-Note that this environment only works in conjunction with an existing `Gemfile`, `Gemfile.lock`, and `gemset.nix`.
+Note that this environment only works in conjunction with an existing `Gemfile`, `Gemfile.lock`, and `gemset.nix`. If you have a `Gemfile.lock` but no `gemset.nix`:
+
+```shell
+nix run nixpkgs#bundix
+```
 
 ## Updating dependencies
 
-To make updates to the app's dependencies, such as bumping the Rails version, there's a special `update` shell for that:
-
-```shell
-nix develop .#update
-```
-
-Inside the shell, run the provided update script:
+To make updates to the app's dependencies, such as bumping the Rails version, there's a special script that generates a new `Gemfile.lock` and `gemset.nix`:
 
 ```shell
 update-deps

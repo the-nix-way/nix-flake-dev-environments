@@ -18,28 +18,19 @@
           name = "rails-env";
           inherit ruby;
           gemdir = ./.; # Points to Gemfile.lock and gemset.nix
-          copyGemFiles = true; # Not sure if this is necessary
         };
 
         inherit (nix-filter.lib) filter;
         inherit (pkgs) bundlerEnv mkShell substituteAll writeScriptBin;
         inherit (pkgs.stdenv) mkDerivation;
 
-        updateScript = builtins.readFile (substituteAll {
-          src = ./scripts/update.sh;
-          bundix = "${pkgs.bundix}/bin/bundix";
-          bundler = "${rubyEnv.bundler}/bin/bundler";
-        });
-
-        updateScriptBin = writeScriptBin "update-deps" updateScript;
+        updateDeps = writeScriptBin "update-deps"
+          (builtins.readFile (substituteAll {
+            src = ./scripts/update.sh;
+            bundix = "${pkgs.bundix}/bin/bundix";
+            bundler = "${rubyEnv.bundler}/bin/bundler";
+          }));
       in {
-        apps = {
-          default = {
-            type = "app";
-            program = "${self.packages.${system}.default}/bin/rails";
-          };
-        };
-
         devShells = rec {
           default = run;
 
@@ -47,16 +38,8 @@
             buildInputs = [
               rubyEnv
               rubyEnv.wrappedRuby
+              updateDeps
             ];
-          };
-
-          update = mkShell {
-            buildInputs = [
-              ruby
-              updateScriptBin
-            ] ++ (with pkgs; [
-              bundler-audit
-            ]);
           };
         };
       }
