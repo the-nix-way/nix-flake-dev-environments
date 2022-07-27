@@ -3,6 +3,11 @@
 
   outputs = { self }: {
     templates = rec {
+      elixir-phoenix = {
+        path = ./elixir-phoenix;
+        description = "Elixir + Phoenix framework development environment";
+      };
+
       gleam = {
         path = ./gleam;
         description = "Gleam development environment";

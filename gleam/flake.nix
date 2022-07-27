@@ -11,13 +11,6 @@
       let
         pkgs = import nixpkgs { inherit system; };
       in {
-        apps = {
-          default = {
-            type = "app";
-            program = "${pkgs.gleam}/bin/gleam";
-          };
-        };
-
         devShells = {
           default = pkgs.mkShell {
             buildInputs = with pkgs; [
