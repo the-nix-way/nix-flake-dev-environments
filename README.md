@@ -1,16 +1,17 @@
 # Development environments driven by Nix flakes
 
-| Language/framework        | Project                             |
-| :------------------------ | :---------------------------------- |
-| [Gleam]                   | [`gleam`](./gleam)                  |
-| [Go]                      | [`go`](./go/)                       |
-| [Java]                    | [`java`](./java/)                   |
-| [Node.js][node]           | [`node`](./node/)                   |
-| [PHP]                     | [`php`](./php/)                     |
-| [Protocol Buffers][proto] | [`protobuf`](./protobuf/)           |
-| [Python]                  | [`python`](./python/)               |
-| [Ruby on Rails][ror]      | [`ruby-on-rails`](./ruby-on-rails/) |
-| [Rust]                    | [`rust`](./rust/)                   |
+| Language/framework        | Project                               |
+| :------------------------ | :------------------------------------ |
+| [Elixir/Phoenix][phx]     | [`elixir-phoenix`](./elixir-phoenix/) |
+| [Gleam]                   | [`gleam`](./gleam)                    |
+| [Go]                      | [`go`](./go/)                         |
+| [Java]                    | [`java`](./java/)                     |
+| [Node.js][node]           | [`node`](./node/)                     |
+| [PHP]                     | [`php`](./php/)                       |
+| [Protocol Buffers][proto] | [`protobuf`](./protobuf/)             |
+| [Python]                  | [`python`](./python/)                 |
+| [Ruby on Rails][ror]      | [`ruby-on-rails`](./ruby-on-rails/)   |
+| [Rust]                    | [`rust`](./rust/)                     |
 
 ## Revisions
 
@@ -35,6 +36,7 @@ The GitPod environment has [Nix] installed and flakes enabled.
 [nix]: https://nixos.org
 [node]: https://nodejs.org
 [php]: https://www.php.net
+[phx]: https://phoenixframework.org
 [proto]: https://developers.google.com/protocol-buffers
 [python]: https://python.org
 [ror]: https://rubyonrails.org

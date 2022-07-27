@@ -11,7 +11,8 @@
       let
         pkgs = import nixpkgs { inherit system; };
 
-        inherit (pkgs) darwin elixir inotify-tools nodejs-18_x terminal-notifier;
+        inherit (pkgs) darwin inotify-tools nodejs-18_x terminal-notifier;
+        inherit (pkgs.beam.packages.erlangR25) elixir;
         inherit (pkgs.lib) optional;
         inherit (pkgs.stdenv) isDarwin isLinux;
 
@@ -33,7 +34,6 @@
 
               echo `${elixir}/bin/mix --version`
               echo `${elixir}/bin/iex --version`
-
               EOF
             '';
           };
