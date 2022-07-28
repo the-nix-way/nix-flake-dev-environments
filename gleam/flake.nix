@@ -20,11 +20,7 @@
             ];
 
             shellHook = ''
-              cat << EOF
-              Entering Gleam env. Running:
-
-              `${pkgs.gleam}/bin/gleam --version`
-              EOF
+              echo "Running `${pkgs.gleam}/bin/gleam --version`"
             '';
           };
         };
