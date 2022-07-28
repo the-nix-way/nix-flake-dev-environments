@@ -26,8 +26,7 @@
 
               # Run when the shell is started up
               shellHook = ''
-                echo "Entering Node.js env"
-                echo "Running node `${node}/bin/node --version`"
+                echo "node `${node}/bin/node --version`"
               '';
             };
           };

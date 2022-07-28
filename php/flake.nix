@@ -42,10 +42,7 @@
 
               # Run when the shell is started up
               shellHook = ''
-                echo "Entering PHP env:"
-                echo ""
                 ${php}/bin/php --version
-                echo ""
               '';
             };
           };

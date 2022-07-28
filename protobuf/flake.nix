@@ -26,9 +26,8 @@
 
               # Run when the shell is started up
               shellHook = ''
-                echo "Entering Protobuf env"
-                echo "Running Buf `${buf}/bin/buf --version`"
-                echo "Running protoc `${protobuf}/bin/protoc --version`"
+                echo "buf `${buf}/bin/buf --version`"
+                ${protobuf}/bin/protoc --version
               '';
             };
           };

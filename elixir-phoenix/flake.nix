@@ -29,12 +29,8 @@
             ] ++ linuxDeps ++ darwinDeps;
 
             shellHook = ''
-              cat << EOF
-              Entering Elixir env. Running:
-
               echo `${elixir}/bin/mix --version`
               echo `${elixir}/bin/iex --version`
-              EOF
             '';
           };
         };

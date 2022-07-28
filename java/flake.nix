@@ -30,8 +30,7 @@
               ] ++ others;
 
               shellHook = ''
-                echo "Entering Java env"
-                echo "Running ${java}/bin/java -version"
+                ${java}/bin/java -version
               '';
             };
           };

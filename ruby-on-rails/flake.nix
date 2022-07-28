@@ -40,6 +40,10 @@
               rubyEnv.wrappedRuby
               updateDeps
             ];
+
+            shellHook = ''
+              ${rubyEnv}/bin/rails --version
+            '';
           };
         };
       }

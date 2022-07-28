@@ -20,7 +20,7 @@
             ];
 
             shellHook = ''
-              echo "Running `${pkgs.gleam}/bin/gleam --version`"
+              ${pkgs.gleam}/bin/gleam --version
             '';
           };
         };
