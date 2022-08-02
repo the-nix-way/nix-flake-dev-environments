@@ -16,17 +16,16 @@
         inherit (pkgs.lib) optional;
         inherit (pkgs.stdenv) isDarwin isLinux;
 
-        linuxDeps = optional isLinux
-          [ inotify-tools ];
-        darwinDeps = optional isDarwin
-          [ terminal-notifier ] ++ (with darwin.apple_sdk.frameworks; [ CoreFoundation CoreServices ]);
+        linuxDeps = optional isLinux [ inotify-tools ];
+        darwinDeps = optional isDarwin [ terminal-notifier ]
+          ++ (with darwin.apple_sdk.frameworks; [
+            CoreFoundation
+            CoreServices
+          ]);
       in {
         devShells = {
           default = pkgs.mkShell {
-            buildInputs = [
-              elixir
-              nodejs-18_x
-            ] ++ linuxDeps ++ darwinDeps;
+            buildInputs = [ elixir nodejs-18_x ] ++ linuxDeps ++ darwinDeps;
 
             shellHook = ''
               echo `${elixir}/bin/mix --version`
@@ -34,6 +33,5 @@
             '';
           };
         };
-      }
-    );
+      });
 }

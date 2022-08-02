@@ -10,30 +10,23 @@
   };
 
   outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = import nixpkgs { inherit system; };
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; };
 
-          java = pkgs.jdk17_headless;
+        java = pkgs.jdk17_headless;
 
-          others = with pkgs; [
-            gradle
-            maven
-          ];
-        in {
-          devShells = {
-            default = pkgs.mkShell {
-              # Packages included in the environment
-              buildInputs = [
-                java
-              ] ++ others;
+        others = with pkgs; [ gradle maven ];
+      in {
+        devShells = {
+          default = pkgs.mkShell {
+            # Packages included in the environment
+            buildInputs = [ java ] ++ others;
 
-              shellHook = ''
-                ${java}/bin/java -version
-              '';
-            };
+            shellHook = ''
+              ${java}/bin/java -version
+            '';
           };
-        }
-      );
+        };
+      });
 }

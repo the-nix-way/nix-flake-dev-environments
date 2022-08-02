@@ -11,43 +11,34 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, mach-nix }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = import nixpkgs { inherit system; };
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; };
 
-          python = pkgs.python39;
+        python = pkgs.python39;
 
-          pythonEnv = mach-nix.lib.${system}.mkPython {
-            requirements = builtins.readFile ./requirements.txt;
+        pythonEnv = mach-nix.lib.${system}.mkPython {
+          requirements = builtins.readFile ./requirements.txt;
+        };
+
+        pythonTools = with pkgs.python39Packages; [ pip virtualenv ];
+      in {
+        devShells = {
+          default = pkgs.mkShell {
+            # Packages included in the environment
+            buildInputs = [ pythonEnv ] ++ pythonTools;
+
+            # Run when the shell is started up
+            shellHook = ''
+              ${python}/bin/python --version
+            '';
           };
+        };
 
-          pythonTools = with pkgs.python39Packages; [
-            pip
-            virtualenv
-          ];
-        in {
-          devShells = {
-            default = pkgs.mkShell {
-              # Packages included in the environment
-              buildInputs = [
-                pythonEnv
-              ] ++ pythonTools;
+        packages = { venv = pythonEnv; };
 
-              # Run when the shell is started up
-              shellHook = ''
-                ${python}/bin/python --version
-              '';
-            };
-          };
-
-          packages = {
-            venv = pythonEnv;
-          };
-
-          defaultPackage = mach-nix.lib.${system}.mkPythonShell {
-            requirements = builtins.readFile ./requirements.txt;
-          };
-        }
-      );
+        defaultPackage = mach-nix.lib.${system}.mkPythonShell {
+          requirements = builtins.readFile ./requirements.txt;
+        };
+      });
 }

@@ -10,26 +10,22 @@
   };
 
   outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = import nixpkgs { inherit system; };
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; };
 
-          node = pkgs.nodejs_latest;
-        in {
-          devShells = {
-            default = pkgs.mkShell {
-              # Packages included in the environment
-              buildInputs = [
-                node
-              ];
+        node = pkgs.nodejs_latest;
+      in {
+        devShells = {
+          default = pkgs.mkShell {
+            # Packages included in the environment
+            buildInputs = [ node ];
 
-              # Run when the shell is started up
-              shellHook = ''
-                echo "node `${node}/bin/node --version`"
-              '';
-            };
+            # Run when the shell is started up
+            shellHook = ''
+              echo "node `${node}/bin/node --version`"
+            '';
           };
-        }
-      );
+        };
+      });
 }

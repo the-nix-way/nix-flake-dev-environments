@@ -10,27 +10,22 @@
   };
 
   outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-          inherit (pkgs) buf protobuf;
-        in {
-          devShells = {
-            default = pkgs.mkShell {
-              # Packages included in the environment
-              buildInputs = with pkgs; [
-                buf
-                protobuf
-              ];
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+        inherit (pkgs) buf protobuf;
+      in {
+        devShells = {
+          default = pkgs.mkShell {
+            # Packages included in the environment
+            buildInputs = with pkgs; [ buf protobuf ];
 
-              # Run when the shell is started up
-              shellHook = ''
-                echo "buf `${buf}/bin/buf --version`"
-                ${protobuf}/bin/protoc --version
-              '';
-            };
+            # Run when the shell is started up
+            shellHook = ''
+              echo "buf `${buf}/bin/buf --version`"
+              ${protobuf}/bin/protoc --version
+            '';
           };
-        }
-      );
+        };
+      });
 }

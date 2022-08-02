@@ -11,41 +11,35 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, php-shell }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = import nixpkgs { inherit system; };
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; };
 
-          php = (php-shell.api.makePhp system {
-            php = "php81";
-            withExtensions = [ "pcov" "xdebug" ];
-            withoutExtensions = [ "sodium" ];
-            extraConfig = ''
-              memory_limit=-1
-            '';
-            flags = {
-              apxs2Support = false;
-              ztsSupport = false;
-            };
-          });
-
-          phpTools = with php.packages; [
-            composer
-          ];
-        in {
-          devShells = {
-            default = pkgs.mkShell {
-              # Packages included in the environment
-              buildInputs = [
-                php
-              ] ++ phpTools;
-
-              # Run when the shell is started up
-              shellHook = ''
-                ${php}/bin/php --version
-              '';
-            };
+        php = (php-shell.api.makePhp system {
+          php = "php81";
+          withExtensions = [ "pcov" "xdebug" ];
+          withoutExtensions = [ "sodium" ];
+          extraConfig = ''
+            memory_limit=-1
+          '';
+          flags = {
+            apxs2Support = false;
+            ztsSupport = false;
           };
-        }
-      );
+        });
+
+        phpTools = with php.packages; [ composer ];
+      in {
+        devShells = {
+          default = pkgs.mkShell {
+            # Packages included in the environment
+            buildInputs = [ php ] ++ phpTools;
+
+            # Run when the shell is started up
+            shellHook = ''
+              ${php}/bin/php --version
+            '';
+          };
+        };
+      });
 }

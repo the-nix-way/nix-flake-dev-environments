@@ -10,40 +10,37 @@
   };
 
   outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-        in {
-          devShells = {
-            default = pkgs.mkShell {
-              # Packages included in the environment
-              buildInputs = with pkgs; [
-                # Go version 1.18
-                go_1_18
+    flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = import nixpkgs { inherit system; };
+      in {
+        devShells = {
+          default = pkgs.mkShell {
+            # Packages included in the environment
+            buildInputs = with pkgs; [
+              # Go version 1.18
+              go_1_18
 
-                # goimports, godoc, etc.
-                gotools
+              # goimports, godoc, etc.
+              gotools
 
-                # https://github.com/golangci/golangci-lint
-                golangci-lint
+              # https://github.com/golangci/golangci-lint
+              golangci-lint
 
-                # The Go language server (for IDEs and such)
-                gopls
+              # The Go language server (for IDEs and such)
+              gopls
 
-                # https://pkg.go.dev/github.com/ramya-rao-a/go-outline
-                go-outline
+              # https://pkg.go.dev/github.com/ramya-rao-a/go-outline
+              go-outline
 
-                # https://github.com/uudashr/gopkgs
-                gopkgs
-              ];
+              # https://github.com/uudashr/gopkgs
+              gopkgs
+            ];
 
-              # Run when the shell is started up
-              shellHook = ''
-                ${pkgs.go_1_18}/bin/go version
-              '';
-            };
+            # Run when the shell is started up
+            shellHook = ''
+              ${pkgs.go_1_18}/bin/go version
+            '';
           };
-        }
-      );
+        };
+      });
 }
