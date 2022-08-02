@@ -6,11 +6,9 @@ Open up the provided Nix shell:
 nix develop --ignore-environment
 ```
 
-Once inside the shell, you can run the Rails app:
+Alternatively, you can run `direnv allow` to activate the shell in your current environment.
 
-```shell
-./bin/rails server
-```
+Then you can run the Nix-bundled Rails app by just running `rails`. The standard `./bin/rails` also works.
 
 To use the Rails environment without checking out this repo:
 
@@ -33,3 +31,4 @@ update-deps
 ```
 
 Once the new `Gemfile.lock` and `gemset.nix` have been created, then opening up the default shell using `nix develop` should work as expected but with the new dependencies.
+

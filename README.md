@@ -1,7 +1,8 @@
 # Development environments driven by Nix flakes
 
-| Language/framework        | Project                               |
+| Language/framework/tool   | Project                               |
 | :------------------------ | :------------------------------------ |
+| [Bazel]                   | [`bazel`](./bazel/)                   |
 | [Elixir/Phoenix][phx]     | [`elixir-phoenix`](./elixir-phoenix/) |
 | [Gleam]                   | [`gleam`](./gleam)                    |
 | [Go]                      | [`go`](./go/)                         |
@@ -27,8 +28,10 @@ You can run these Nix flakes examples in your browser using [GitPod]:
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/the-nix-way/flake-dev-environments)
 
-The GitPod environment has [Nix] installed and flakes enabled.
+The GitPod environment has [Nix] installed and [flakes] enabled.
 
+[bazel]: https://bazel.build
+[flakes]: https://nixos.wiki/wiki/Flakes
 [gitpod]: https://gitpod.io
 [gleam]: https://gleam.run
 [go]: https://golang.org
