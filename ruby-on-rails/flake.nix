@@ -12,7 +12,7 @@
       let
         pkgs = import nixpkgs { inherit system; };
 
-        ruby = pkgs.ruby_3_0; # Use a single version of Ruby throughout
+        ruby = pkgs.ruby_3_1; # Use a single version of Ruby throughout
 
         rubyEnv = bundlerEnv { # The full app environment with dependencies
           name = "rails-env";
@@ -41,6 +41,10 @@
               ${rubyEnv}/bin/rails --version
             '';
           };
+        };
+
+        packages = rec {
+          default = rubyEnv;
         };
       });
 }
