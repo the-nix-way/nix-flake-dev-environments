@@ -10,32 +10,37 @@
   outputs = { self, nixpkgs, flake-utils, nix-filter }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        overlays = [
+          (self: super: {
+            ruby = pkgs.ruby_3_1;
+          })
+        ];
+        pkgs = import nixpkgs { inherit overlays system; };
 
-        ruby = pkgs.ruby_3_1; # Use a single version of Ruby throughout
-
-        rubyEnv = bundlerEnv { # The full app environment with dependencies
+        rubyEnv = pkgs.bundlerEnv {
+          # The full app environment with dependencies
           name = "rails-env";
-          inherit ruby;
+          inherit (pkgs) ruby;
           gemdir = ./.; # Points to Gemfile.lock and gemset.nix
         };
 
-        inherit (nix-filter.lib) filter;
-        inherit (pkgs) bundlerEnv mkShell substituteAll writeScriptBin;
-        inherit (pkgs.dockerTools) buildImage pullImage;
-        inherit (pkgs.stdenv) mkDerivation;
-
-        updateDeps = writeScriptBin "update-deps" (builtins.readFile
-          (substituteAll {
+        updateDeps = pkgs.writeScriptBin "update-deps" (builtins.readFile
+          (pkgs.substituteAll {
             src = ./scripts/update.sh;
             bundix = "${pkgs.bundix}/bin/bundix";
             bundler = "${rubyEnv.bundler}/bin/bundler";
           }));
-      in {
+      in
+      {
+        apps.default = {
+          type = "app";
+          program = "${rubyEnv}/bin/rails";
+        };
+
         devShells = rec {
           default = run;
 
-          run = mkShell {
+          run = pkgs.mkShell {
             buildInputs = [ rubyEnv rubyEnv.wrappedRuby updateDeps ];
 
             shellHook = ''
@@ -47,18 +52,16 @@
         packages = {
           default = rubyEnv;
 
-          docker = buildImage {
+          docker = pkgs.dockerTools.buildImage {
             name = "rails-app";
             tag = "latest";
-            fromImage = pullImage {
-              imageName = "alpine";
-              finalImageTag = "3.15.15";
-              imageDigest = "sha256:26284c09912acfc5497b462c5da8a2cd14e01b4f3ffa876596f5289dd8eab7f2";
-              sha256 = "sha256-GI48WVALDbGycMtYJ8MM7WhmOiaWOZcU+cBf9EQ7tgY=";
+            fromImage = pkgs.dockerTools.pullImage {
+              imageName = "ubuntu";
+              finalImageTag = "20.04";
+              imageDigest = "sha256:a06ae92523384c2cd182dcfe7f8b2bf09075062e937d5653d7d0db0375ad2221";
+              sha256 = "sha256-d249m1ZqcV72jfEcHDUn+KuOCs8WPaBJRcZotJjVW0o=";
             };
-
-            copyToRoot = rubyEnv;
-            config.Cmd = [ "/bin/rails" ];
+            config.Cmd = [ "${rubyEnv}/bin/bundler" ];
           };
         };
       });
