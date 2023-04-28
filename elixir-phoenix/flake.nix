@@ -1,5 +1,5 @@
 {
-  description = "Gleam";
+  description = "elixir-phoenix";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
